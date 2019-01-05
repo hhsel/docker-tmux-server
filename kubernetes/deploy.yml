@@ -1,0 +1,45 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: jumpserver-internal
+  namespace: management
+  labels:
+    app: jumpserver-internal
+spec:
+  template:
+    metadata:
+      labels:
+        app: jumpserver-internal
+    spec:
+      hostname: tmux-server
+      nodeSelector:
+        beta.kubernetes.io/arch: arm64
+      containers:
+      - image: hhsel/tmux-server-arm64:2.8
+        name: tmux
+        ports:
+        - containerPort: 22
+          name: ssh
+        volumeMounts:
+        - name: tmux-config
+          mountPath: /home/tmux/.tmux.conf
+          subPath: .tmux.conf
+        - name: authorized-keys
+          mountPath: /home/tmux/.ssh/authorized_keys
+          subPath: authorized_keys
+        env:
+        - name: TZ
+          value: Asia/Tokyo
+      volumes:
+      - name: tmux-config
+        configMap:
+          name: jumpserver-internal
+          items:
+          - key: tmux-config
+            path: .tmux.conf
+      - name: authorized-keys
+        configMap:
+          name: jumpserver-internal
+          items:
+          - key: authorized-keys
+            path: authorized_keys

@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+docker build -t hhsel/tmux-server-arm64:2.8 .

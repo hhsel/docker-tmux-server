@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jumpserver-internal
+  name: jumpserver-internal
+  namespace: management
+spec:
+  type: ClusterIP
+  clusterIP: 10.88.1.1
+  selector:
+    app: jumpserver-internal
+  ports:
+  - name: ssh
+    port: 22
+    targetPort: 22

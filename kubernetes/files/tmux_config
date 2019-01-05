@@ -1,0 +1,53 @@
+# Alter global prefix from Ctrl+B to Ctrl+T
+set -g prefix C-s
+bind C-s send-prefix
+
+unbind-key C-b
+
+#colors
+set -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ',*:enacs@:smacs@:rmacs@:acsc@'
+
+#setting delay shorter
+set -s escape-time 1
+
+# window index from 0 to 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# update config file immediately
+bind r source-file ~/.tmux.conf \; display "config reloaded"
+
+unbind-key %
+bind-key | split-window -h
+
+unbind-key '"'
+bind-key - split-window -v
+
+unbind-key &
+bind-key k kill-pane
+
+bind-key C-h select-pane -L
+bind-key C-j select-pane -D
+bind-key C-k select-pane -U
+bind-key C-l select-pane -R
+
+bind C-n next-window
+bind C-p previous-window
+
+set-option -g mouse on
+
+set-option -g  status-style 'bg=#118833'
+set-option -ga status-style 'fg=#ffffff,bold'
+set-option -g pane-active-border-fg '#ff0000'
+
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+setw -g pane-border-style fg=green,bg=black
+setw -g pane-active-border-style fg=white,bg=yellow
+#setw -g window-style fg=colour240,bg=colour235
+#setw -g window-active-style fg=white,bg=black
+
