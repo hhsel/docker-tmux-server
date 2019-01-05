@@ -9,6 +9,7 @@ If you're working on x86-based clusters, see below instruction.
 ## How to use (for arm64-based platforms)
  * Move to kubernetes directory.
  * Add public key to files/authorized_keys file.
+ * **Edit svc.yml for ClusterIP to suit your cluster or remove this line if you don't want clusterIP to be fixed (instead assigned randomly when creation).**
  * run ```./create_configmap``` to deploy ConfigMap.
  * run kubectl apply -f, to deploy deploy.yml and svc.yml.
  * Now you can ssh into the pod with jumpserver-internal.management.svc.k8s.local (k8s.local part depends on your setup) with the private key you created with the public key that was added to files/authorized_keys. run
