@@ -7,8 +7,6 @@ Confirmed to work on ROCK64 and ROCKPRO64 based kubernetes clusters, but it will
 If you're working on x86-based clusters, see below instruction.
 
 ## How to use (for arm64-based platforms)
- * Move to docker directory and run ./build, then 'hhsel/tmux-server-arm64:2.8' will be built.
- * Delete intermediate (dangling) images to save disk space.
  * Move to kubernetes directory.
  * Add public key to files/authorized_keys file.
  * run ```./create_configmap``` to deploy ConfigMap.
@@ -17,9 +15,14 @@ If you're working on x86-based clusters, see below instruction.
 ``ssh -i <my private key> tmux@jumpserver-internal.management.svc.k8s.local``
  * Currently logging in as tmux user is supported, and password authentication is prohibited (the password is on Dockerfile!).
  * After login, run 'tmux new' to start tmux. You can further ssh into somewhere else.
- 
+
+### if you need modification...
+ * Move to docker directory and modify Dockerfile, then run ./build, then 'hhsel/tmux-server-arm64:2.8' will be built.
+ * Delete intermediate (dangling) images to save disk space.
+ * Upload the image to your local registry
+
 ## for x86-based platforms
- * Remove arm64v8 parts from Dockerfile
+ * Remove arm64v8 parts from Dockerfile and build yourself
  * Remove ```beta.kubernetes.io/arch: arm64``` nodeSelector from deploy.yml.
  * Remove arm64 from image name if you prefer.
  
